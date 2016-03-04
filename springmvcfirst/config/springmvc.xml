@@ -20,14 +20,15 @@ http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 	<!-- 
 		配置处理器
 	 -->
-	 
+	 <bean name="/queryItems.action" class="cn.richard.ssm.controller.ItemsController1"/>
 	 <!-- 
 	 	配置处理器适配器 
 	 	-->
 	 <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
 	 <!-- 配置处理器映射器 -->
-	 
-	 
+	 <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>	 
 	 <!-- 配置视图解析器 -->
+	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+	
 	
 </beans>
