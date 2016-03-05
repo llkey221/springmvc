@@ -20,13 +20,28 @@ http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 	<!-- 
 		配置处理器
 	 -->
-	 <bean name="/queryItems.action" class="cn.richard.ssm.controller.ItemsController1"/>
+	 <bean id="ItemsController1" name="/queryItems.action" class="cn.richard.ssm.controller.ItemsController1"/>
+	 <bean id="ItemsController2" class="cn.richard.ssm.controller.ItemsController2"></bean>
 	 <!-- 
 	 	配置处理器适配器 
+	 	1.1 SimpleControllerHandlerAdapter,要求处理器实现Controller接口，实现了该接口则可以被Adpater适配和执行
+	 	1.2 HttpRequestHandlerAdapter,要求处理器实现HttpRequestHandler接口，实现了该接口则可以被Adpater进行适配和执行
 	 	-->
-	 <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
+	 <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>	 
+	 <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"></bean>
 	 <!-- 配置处理器映射器 -->
-	 <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>	 
+	 <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>
+	 
+	 <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"	 >
+	 	<property name="mappings">
+	 		<props>
+	 			<prop key="/queryItems1.action">ItemsController1</prop>
+	 			<prop  key="/queryItems2.action">ItemsController1</prop>
+	 			<prop key="/queryItems3.action">ItemsController2</prop>
+	 		</props>
+	 	</property>
+	 </bean>
+	 
 	 <!-- 配置视图解析器 -->
 	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
 	
