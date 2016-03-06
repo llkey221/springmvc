@@ -10,11 +10,14 @@
 <title>查询商品列表</title>
 </head>
 <body>
-
-查询条件：
+<form action="${pageContext.request.contextPath}/item/queryItem.action }" method="post">
+		查询条件：
 		<table width="100%" border=1>
 			<tr>
-				<td><input type="submit" value="查询"/>				
+				<td>
+					<input type="text" name="name"/>
+					<input type="submit" value="查询"/>
+				</td>				
 			</tr>			
 		</table>
 		商品列表：
@@ -30,14 +33,14 @@
 				<tr>
 					<td>${item.name }</td>
 					<td>${item.price }</td>
-					<td><fmt:formatDate value="${item.createtime }" pattern="yyyy-MM-dd"/></td>
-					<td>${item.detail}</td>
+					<td><fmt:formatDate value="${item.createtime }" pattern="yyyy-MM-dd"/> </td>
+					<td>${item.detail }</td>
 					<td><a href="${pageContext.request.contextPath }/item/editItem.action?id=${item.id}">修改</a></td>
+					<td></td>
 				</tr>
 			</c:forEach>
 		</table>
-			
-			
-
-</body>
-</html>
+		
+	</form>
+	</body>
+	</html>

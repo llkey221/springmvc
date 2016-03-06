@@ -21,7 +21,14 @@ http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 		配置处理器
 	 -->
 	 <bean id="ItemsController1" name="/queryItems.action" class="cn.richard.ssm.controller.ItemsController1"/>
-	 <bean id="ItemsController2" class="cn.richard.ssm.controller.ItemsController2"></bean>
+	 <bean id="ItemsController2" name="/queryItems4.action" class="cn.richard.ssm.controller.ItemsController2"></bean>
+	 <!-- 对注解的Handler进行配置 -->
+	 <!-- <bean class="cn.richard.ssm.controller.ItemsController3"></bean> -->
+	 <!-- 使用组件扫描对Handler进行配置
+	 	context:component-scan组件扫描，可以扫描controller、service...
+	  -->
+	  <context:component-scan base-package="cn.richard.ssm.controller"></context:component-scan>
+	 
 	 <!-- 
 	 	配置处理器适配器 
 	 	1.1 SimpleControllerHandlerAdapter,要求处理器实现Controller接口，实现了该接口则可以被Adpater适配和执行
@@ -31,6 +38,15 @@ http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 	 <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"></bean>
 	 <!-- 配置处理器映射器 -->
 	 <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>
+	 
+	 <!-- 注解的适配器和映射器 
+	 	1 RequestMappingHandlerMapping
+	 	2 RequestMappingHandlerAdapter
+	 -->
+	 <!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+	 <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean> -->
+	 
+	 <mvc:annotation-driven></mvc:annotation-driven>
 	 
 	 <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"	 >
 	 	<property name="mappings">
@@ -42,8 +58,14 @@ http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 	 	</property>
 	 </bean>
 	 
-	 <!-- 配置视图解析器 -->
-	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+	 <!-- 配置视图解析器
+	 	通过配置前缀和后缀可以简化配置视图时候的路径 
+	  -->
+	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	 	<!--配置视图前缀  -->
+<!-- 	 	<property name="prefix" value="/WEB-INF/jsp/"></property>
+	 	<property name="suffix" value=".jsp"></property> -->
+	 </bean>
 	
 	
 </beans>
